@@ -78,12 +78,32 @@ function buildCharts(sample) {
       yaxis: { title: "Number of Bacteria" },
       hovermode: "closest"
     };
-   
+    // Render the Bubble Chart
     Plotly.newPlot("bubble", [bubbleTrace], bubbleLayout);
   });
 }
- // Render the Bubble Chart
- 
+ // Enhanced buildMetadata function
+function buildMetadata(sample) {
+  d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
+      const metadata = data.metadata;
+      const sampleMetadata = metadata.find(item => item.id === parseInt(sample));
+      let panel = d3.select("#sample-metadata-content");
+
+      // Clear existing metadata
+      panel.html("");
+
+      // Create a table structure for metadata
+      let table = panel.append("table").attr("class", "table table-bordered");
+
+      // Populate the table with key-value pairs
+      Object.entries(sampleMetadata).forEach(([key, value]) => {
+          let row = table.append("tr");
+          row.append("td").text(key.toUpperCase()).attr("class", "font-weight-bold");
+          row.append("td").text(value);
+      });
+  });
+}
+
 // Function to run on page load
 function init() {
   const selector = d3.select("#selDataset");
@@ -108,6 +128,10 @@ function optionChanged(newSample) {
   buildCharts(newSample);
   buildMetadata(newSample);
 }
+
+
+
+
 
 // Initialize the dashboard on page load
 init();
