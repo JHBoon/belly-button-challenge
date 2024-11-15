@@ -1,6 +1,8 @@
 # belly-button-challenge
 Analyzing bacteria in belly buttons. 
 (Challenge week 12 Data analyst course Berkeley Bootcamp) 
+See it here: 
+https://jhboon.github.io/belly-button-challenge/starter_code/
 
 This project used a large set of research data about the various types of bacteria in belly buttons of the participants of the  study.
 
